@@ -1816,14 +1816,13 @@ class Users extends CI_Controller {
 
 				$p = "status/status_tambah";
 
-				$data['judul_web'] 	  = "Daftar Penempatan Prakerin | Aplikasi SIPKISMK";
+				$data['judul_web'] 	  = "Daftar Penempatan Prakerin | Aplikasi Sistem kerja Praktik";
 
-				$this->db->order_by('Judul', 'ASC');
-				$data['v_industri']   = $this->db->get('tbl_industri');
+
 			}else{
 					$p = "status/status";
 
-					$data['judul_web'] 	  = "Status Prakerin | Aplikasi SIPKISMK";
+					$data['judul_web'] 	  = "Status Prakerin | Aplikasi Sistem kerja Praktik";
 
 					$kdpenempatan  = $cek_penempatan->row()->kdpenempatan;
 					$this->db->order_by('kdpenempatan', 'DESC');
