@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-error_reporting(0);
+// error_reporting(0);
 class Web extends CI_Controller {
 
 	public function index()
 	{
 		$ceks = $this->session->userdata('prakrin_smk@Proyek-2017');
 		// if(!isset($ceks)) {
-			// redirect('web/login');
+		// 	redirect('web/login');
 		// }else{
 		// 			redirect('users');
 		// }

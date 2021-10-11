@@ -97,7 +97,7 @@ $sub_menu3 = strtolower($this->uri->segment(3)); ?>
                       </div>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label class="control-label col-lg-3">Nama Pembimbing</label>
                       <div class="col-lg-9">
                         <select class="form-control cari_pemb" name="kdpemb" required style="width:100%;">
@@ -107,7 +107,7 @@ $sub_menu3 = strtolower($this->uri->segment(3)); ?>
                           <?php }; ?>
                         </select>
                       </div>
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
                       <label class="control-label col-lg-3">Foto</label>

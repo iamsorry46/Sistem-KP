@@ -11,13 +11,15 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 <html lang="en">
 
 <!-- Mirrored from demo.interface.club/limitless/layout_2/LTR/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Apr 2017 11:59:08 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<base href="<?php echo base_url();?>"/>
+	<base href="<?php echo base_url();?>" />
 
 	<title>Sistem Kerja Praktek</title>
 
@@ -36,61 +38,63 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 	<script type="text/javascript" src="assets/js/plugins/loaders/blockui.min.js"></script>
 	<!-- /core JS files -->
 	<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-		<script>
-			$(document).ready(function(){
-				window.setInterval(function () {
-					var sisawaktu = $("#waktu").html();
-					sisawaktu = eval(sisawaktu);
-					if (sisawaktu == 0) {
-						location.href = "http://praktek.pe.hu/users/profile";
-					} else {
-						$("#waktu").html(sisawaktu - 1);
-					}
-				}, 1000);
-			});
-		</script>
-		<style type="text/css">
-			body {
-				font-size:12pt;
-				font-family:verdana;
-				background-color:white;
-			} 
-			#waktu {
-				font-size:25pt;
-				color:red;
-			}
-		</style>
+
+	<script>
+		$(document).ready(function () {
+			window.setInterval(function () {
+				var sisawaktu = $("#waktu").html();
+				sisawaktu = eval(sisawaktu);
+				if (sisawaktu == 0) {
+					location.href = "http://praktek.pe.hu/users/profile";
+				} else {
+					$("#waktu").html(sisawaktu - 1);
+				}
+			}, 1000);
+		});
+	</script>
+	<style type="text/css">
+		body {
+			font-size: 12pt;
+			font-family: verdana;
+			background-color: white;
+		}
+
+		#waktu {
+			font-size: 25pt;
+			color: red;
+		}
+	</style>
 
 	<script src="assets/js/select2.min.js"></script>
 	<script>
-	    $(document).ready(function () {
-	        $(".cari_label").select2({
-	            placeholder: "Pilih Label"
-	        });
-					$(".cari_jurusan").select2({
-	            placeholder: "Pilih Jurusan"
-	        });
-					$(".cari_kelas").select2({
-	            placeholder: "Pilih Kelas"
-	        });
-					$(".cari_pemb").select2({
-	            placeholder: "Pilih Pembimbing"
-	        });
-					$(".cari_siswa").select2({
-	            placeholder: "Pilih Siswa"
-	        });
-					$(".cari_industri").select2({
-	            placeholder: "Pilih Industri"
-	        });
-	    });
+		$(document).ready(function () {
+			$(".cari_label").select2({
+				placeholder: "Pilih Label"
+			});
+			$(".cari_jurusan").select2({
+				placeholder: "Pilih Jurusan"
+			});
+			$(".cari_kelas").select2({
+				placeholder: "Pilih Kelas"
+			});
+			$(".cari_pemb").select2({
+				placeholder: "Pilih Pembimbing"
+			});
+			$(".cari_siswa").select2({
+				placeholder: "Pilih Siswa"
+			});
+			$(".cari_industri").select2({
+				placeholder: "Pilih Industri"
+			});
+		});
 	</script>
 
 	<?php
-	if ($sub_menu == "" or $sub_menu == "profile" or $sub_menu == "lap_sk" or $sub_menu == "lap_sm") {?>
+	if ($sub_menu == "" or $sub_menu == "profile" or $sub_menu == "lap_sk" or $sub_menu == "lap_sm" or $sub_menu=='buat_bimbingan') {?>
 	<!-- Theme JS files -->
 
-		<link rel="stylesheet" href="assets/calender/css/style.css">
-		<link rel="stylesheet" href="assets/calender/css/pignose.calendar.css">
+	<link rel="stylesheet" href="assets/calender/css/style.css">
+	<link rel="stylesheet" href="assets/calender/css/pignose.calendar.css">
 
 	<script type="text/javascript" src="assets/js/plugins/visualization/d3/d3.min.js"></script>
 	<script type="text/javascript" src="assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
@@ -107,18 +111,18 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 	<?php
 	} ?>
 
-		<?php
+	<?php
 	if ($sub_menu == "info" or $sub_menu == "j_k" or $sub_menu == "pengguna" or $sub_menu == "industri" or $sub_menu == "penempatan" or $sub_menu == "nilai_praktik" or
 	    $sub_menu == "d_siswa" or $sub_menu == "bimbingan" or $sub_menu == "nilai" or
-			$sub_menu == "status_prakerin" or $sub_menu == "bimbingan_siswa" or $sub_menu == "nilai_prakerin") {?>
+			$sub_menu == "status_prakerin" or $sub_menu == "bimbingan_siswa" or $sub_menu == "nilai_prakerin" or $sub_menu=="buat_bimbingan") {?>
 	<!-- Theme JS files -->
-			<script type="text/javascript" src="assets/js/plugins/tables/datatables/datatables.min.js"></script>
-			<script type="text/javascript" src="assets/js/plugins/editors/summernote/summernote.min.js"></script>
-			<script type="text/javascript" src="assets/js/plugins/forms/styling/uniform.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/tables/datatables/datatables.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/editors/summernote/summernote.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/forms/styling/uniform.min.js"></script>
 
-			<script type="text/javascript" src="assets/js/core/app.js"></script>
-			<script type="text/javascript" src="assets/js/pages/editor_summernote.js"></script>
-			<script type="text/javascript" src="assets/js/pages/datatables_basic.js"></script>
+	<script type="text/javascript" src="assets/js/core/app.js"></script>
+	<script type="text/javascript" src="assets/js/pages/editor_summernote.js"></script>
+	<script type="text/javascript" src="assets/js/pages/datatables_basic.js"></script>
 
 	<!-- /theme JS files -->
 	<?php
@@ -126,12 +130,13 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 
 
 </head>
+
 <body>
 
 	<!-- Main navbar -->
 	<div class="navbar navbar-default header-highlight">
 		<div class="navbar-header">
-			<a class="navbar-brand" href=""style="color:white;"> APLIKASI<span class="label bg-success-400"></span></a>
+			<a class="navbar-brand" href="" style="color:white;"> APLIKASI<span class="label bg-success-400"></span></a>
 
 			<ul class="nav navbar-nav visible-xs-block">
 				<li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
@@ -141,13 +146,15 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 
 		<div class="navbar-collapse collapse" id="navbar-mobile">
 			<ul class="nav navbar-nav">
-				<li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
+				<li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a>
+				</li>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown dropdown-user">
 					<a class="dropdown-toggle" data-toggle="dropdown">
-						<img src="foto/<?php if($level == 'Siswa'){echo"siswa/";} if($level != 'Pembimbing' ){if($cek->foto == ''){echo 'default.png';}else{echo $cek->foto;}}else{echo"default.png";} ?>" class="img-circle" alt="" width="30" height="28">
+						<img src="foto/<?php if($level == 'Siswa'){echo"siswa/";} if($level != 'Pembimbing' ){if($cek->foto == ''){echo 'default.png';}else{echo $cek->foto;}}else{echo"default.png";} ?>"
+							class="img-circle" alt="" width="30" height="28">
 						<span><?php echo ucwords($nama); ?></span>
 						<i class="caret"></i>
 					</a>
@@ -178,7 +185,9 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 					<div class="sidebar-user">
 						<div class="category-content">
 							<div class="media">
-								<a href="users/profile" class="media-left"><img src="foto/<?php if($level == 'Siswa'){echo"siswa/";} if($level != 'Pembimbing' ){if($cek->foto == ''){echo 'default.png';}else{echo $cek->foto;}}else{echo"default.png";} ?>" class="img-circle img-sm" alt=""></a>
+								<a href="users/profile" class="media-left"><img
+										src="foto/<?php if($level == 'Siswa'){echo"siswa/";} if($level != 'Pembimbing' ){if($cek->foto == ''){echo 'default.png';}else{echo $cek->foto;}}else{echo"default.png";} ?>"
+										class="img-circle img-sm" alt=""></a>
 								<div class="media-body">
 									<span class="media-heading text-semibold"><?php echo ucwords($nama); ?></span>
 									<div class="text-size-mini text-muted">
@@ -197,36 +206,61 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 							<ul class="navigation navigation-main navigation-accordion">
 
 								<!-- Main -->
-								<li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
+								<li class="navigation-header"><span>Main</span> <i class="icon-menu"
+										title="Main pages"></i></li>
 								<!-- <li class="<?php if ($sub_menu == "") { echo 'active';}?>"><a href=""><i class="icon-home4"></i> <span>Beranda</span></a></li> -->
-							<?php if ($level == 'Siswa'){?>
-												<li class="<?php if ($sub_menu == "status_prakerin") { echo 'active';}?>"><a href="users/status_prakerin"><i class="icon-cogs"></i> <span>Status KP</span></a></li>
-							<?php } ?>
-								<li class="<?php if ($sub_menu == "profile") { echo 'active';}?>"><a href="users/profile"><i class="icon-user"></i> <span>Profil</span></a></li>
+								<?php if ($level == 'Siswa'){?>
+								<li class="<?php if ($sub_menu == "status_prakerin") { echo 'active';}?>"><a
+										href="users/status_prakerin"><i class="icon-cogs"></i> <span>Status
+											KP</span></a></li>
+								<?php } ?>
+								<li class="<?php if ($sub_menu == "profile") { echo 'active';}?>"><a
+										href="users/profile"><i class="icon-user"></i> <span>Profil</span></a></li>
 
 								<?php if ($level == 'Admin'){ ?>
-													<!--<li class="<?php /**if ($sub_menu == "info") { echo 'active';}*/?>"><a href="users/info"><i class="icon-info22"></i> <span>Kelola Info</span></a></li>-->
-													<li class="<?php if ($sub_menu == "j_k") { echo 'active';}?>"><a href="users/j_k"><i class="icon-database-add"></i> <span>Jurusan & Kelas</span></a></li>
-													<li class="<?php if ($sub_menu == "pengguna") { echo 'active';}?>"><a href="users/pengguna"><i class="icon-users"></i> <span>Kelola Pengguna</span></a></li>
-												    <!--<li class="<?php //if ($sub_menu == "pengguna") { echo 'active';}?>"><a href="users/industri"><i class="icon-users"></i> <span>Kelola Industri</span></a></li>-->
-													<li class="<?php if ($sub_menu == "penempatan") { echo 'active';}?>"><a href="users/penempatan"><i class="icon-link2"></i> <span>Penempatan</span></a></li>
-													<li class="<?php if ($sub_menu == "nilai_praktik") { echo 'active';}?>"><a href="users/nilai_praktik"><i class="icon-star-full2"></i> <span>Nilai Praktik</span></a></li>
-													<li class="<?php if ($sub_menu == "monitoring") { echo 'active';}?>"><a href="users/monitoring"><i class="icon-stats-bars2"></i> <span>Monitoring</span></a></li>
-													<li class="<?php if ($sub_menu == "status_pendaftaran") { echo 'active';}?>"><a href="users/status_pendaftaran"><i class="icon-megaphone"></i> <span>Status Pendaftaran</span></a></li>
+								<!--<li class="<?php /**if ($sub_menu == "info") { echo 'active';}*/?>"><a href="users/info"><i class="icon-info22"></i> <span>Kelola Info</span></a></li>-->
+								<li class="<?php if ($sub_menu == "j_k") { echo 'active';}?>"><a href="users/j_k"><i
+											class="icon-database-add"></i> <span>Jurusan & Kelas</span></a></li>
+								<li class="<?php if ($sub_menu == "pengguna") { echo 'active';}?>"><a
+										href="users/pengguna"><i class="icon-users"></i> <span>Kelola
+											Pengguna</span></a></li>
+								<!--<li class="<?php //if ($sub_menu == "pengguna") { echo 'active';}?>"><a href="users/industri"><i class="icon-users"></i> <span>Kelola Industri</span></a></li>-->
+								<li class="<?php if ($sub_menu == "penempatan") { echo 'active';}?>"><a
+										href="users/penempatan"><i class="icon-link2"></i> <span>Penempatan</span></a>
+								</li>
+								<li class="<?php if ($sub_menu == "nilai_praktik") { echo 'active';}?>"><a
+										href="users/nilai_praktik"><i class="icon-star-full2"></i> <span>Nilai
+											Praktik</span></a></li>
+								<li class="<?php if ($sub_menu == "monitoring") { echo 'active';}?>"><a
+										href="users/monitoring"><i class="icon-stats-bars2"></i>
+										<span>Monitoring</span></a></li>
+								<li class="<?php if ($sub_menu == "status_pendaftaran") { echo 'active';}?>"><a
+										href="users/status_pendaftaran"><i class="icon-megaphone"></i> <span>Status
+											Pendaftaran</span></a></li>
 								<?php }elseif ($level == 'Pembimbing'){?>
-													<li class="<?php if ($sub_menu == "d_siswa") { echo 'active';}?>"><a href="users/d_siswa"><i class="icon-book3"></i> <span>Daftar Siswa</span></a></li>
-													<li class="<?php if ($sub_menu == "bimbingan") { echo 'active';}?>"><a href="users/bimbingan"><i class="icon-pencil7"></i> <span>Bimbingan</span></a></li>
-													<li class="<?php if ($sub_menu == "nilai") { echo 'active';}?>"><a href="users/nilai"><i class="icon-star-full2"></i> <span>Nilai</span></a></li>
+								<li class="<?php if ($sub_menu == "d_siswa") { echo 'active';}?>"><a
+										href="users/d_siswa"><i class="icon-book3"></i> <span>Daftar Siswa</span></a>
+								</li>
+								<li class="<?php if ($sub_menu == "bimbingan") { echo 'active';}?>"><a
+										href="users/bimbingan"><i class="icon-pencil7"></i> <span>Bimbingan</span></a>
+								</li>
+								<li class="<?php if ($sub_menu == "nilai") { echo 'active';}?>"><a href="users/nilai"><i
+											class="icon-star-full2"></i> <span>Nilai</span></a></li>
 								<?php }elseif ($level == 'Siswa'){?>
-												  <li class="<?php if ($sub_menu == "bimbingan_siswa") { echo 'active';}?>"><a href="users/bimbingan_siswa"><i class="icon-envelop5"></i> <span>Bimbingan</span></a></li>
-													<li class="<?php if ($sub_menu == "nilai_prakerin") { echo 'active';}?>"><a href="users/nilai_prakerin"><i class="icon-star-full2"></i> <span>Nilai KP</span></a></li>
+								<li class="<?php if ($sub_menu == "bimbingan_siswa" || $sub_menu==='buat_bimbingan') { echo 'active';}?>"><a
+										href="users/bimbingan_siswa"><i class="icon-envelop5"></i>
+										<span>Bimbingan</span></a></li>
+								<li class="<?php if ($sub_menu == "nilai_prakerin") { echo 'active';}?>"><a
+										href="users/nilai_prakerin"><i class="icon-star-full2"></i> <span>Nilai
+											KP</span></a></li>
 								<?php } ?>
 
 
 								<!-- /main -->
 
 								<!-- Logout -->
-								<li class="navigation-header"><span>Keluar</span> <i class="icon-menu" title="Forms"></i></li>
+								<li class="navigation-header"><span>Keluar</span> <i class="icon-menu"
+										title="Forms"></i></li>
 								<li><a href="web/logout"><i class="icon-switch2"></i> <span>Keluar </span></a></li>
 
 								<!-- /logout -->

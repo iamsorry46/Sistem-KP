@@ -33,7 +33,7 @@ $sub_menu3 = strtolower($this->uri->segment(3)); ?>
                       <th>Nama Industri</th>
                       <th>Tahun</th>
                       <th>Status</th>
-                      <th class="text-center" width="240">Aksi</th>
+                      <th class="text-center" width="380">Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -78,6 +78,7 @@ $sub_menu3 = strtolower($this->uri->segment(3)); ?>
                             ?>
                           </td>
                           <td>
+                            
                             <a <?php if ($baris->status != 'ditolak') {?>href="#" data-toggle="modal" data-target=".modal_tolak_<?php echo $no;?>"<?php }else{ ?>href="users/penempatan/tolak/<?php echo $baris->kdpenempatan; ?>"<?php } ?> class="btn btn-warning btn-xs">
                               <?php if ($baris->status == 'ditolak') {
                                         echo "Batal";
@@ -96,6 +97,9 @@ $sub_menu3 = strtolower($this->uri->segment(3)); ?>
                             </a>
                             <a href="users/penempatan/d/<?php echo $baris->kdpenempatan; ?>" class="btn btn-info btn-xs"><i class="icon-eye"></i></a>
                             <a href="users/penempatan/h/<?php echo $baris->kdpenempatan; ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda yakin?')"><i class="icon-trash"></i></a>
+                            <?php if($baris->status=='diterima'): ?>
+                            <button type="button" onclick="setPembimbing(<?=$baris->nis?>)" class="btn btn-success"><i class="fa fa-user"></i>Pembimbing</button>
+                            <?php endif; ?>
                           </td>
                         </tr>
 
@@ -134,3 +138,53 @@ $sub_menu3 = strtolower($this->uri->segment(3)); ?>
       <!-- /basic datatable -->
     </div>
     <!-- /dashboard content -->
+<!-- Modal -->
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-card-4">
+      <form action="<?=base_url('costume/simpanPembimbing')?>" method="post">
+      <header class="w3-container w3-teal"> 
+        <span onclick="document.getElementById('id01').style.display='none'" 
+        class="w3-button w3-display-topright">&times;</span>
+        <h2>Beri Pembimbing</h2>
+      </header>
+      <div class="w3-container">
+      <input type="text"  name="nis" class="nis">
+       <div class="form-group">
+         <label for="">Pilih Pembimbing</label>
+         <select name="kdpemb" id="kdpemb" class="form-control">
+           <option value=""></option>
+         </select>
+         <small id="helpId" class="text-muted">Pilih Pembimbing</small>
+       </div>
+      </div>
+      <footer class="w3-container">
+        <button type="submit" class="btn btn-success btn-xs">Simpan </button>
+      </footer>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setPembimbing(nis) { 
+    $.ajax({
+      type: "POST",
+      url: "<?=base_url('Costume/getPembimbing')?>",
+      dataType: "JSON",
+      success: function (response) {
+        let html=""
+        response.forEach(element => {
+          html+=`<option value="${element.kdpemb}">${element.nama_lengkap}</option>`;
+        });
+        $("#kdpemb").html(html)
+    $(".nis").val(nis)
+    $(".nis").hide()
+    $("#id01").attr('style','display:block');
+      }
+    });
+   }
+
+</script>

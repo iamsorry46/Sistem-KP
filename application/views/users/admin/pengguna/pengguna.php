@@ -96,7 +96,12 @@ $sub_menu3 = strtolower($this->uri->segment(3)); ?>
                           <td><?php echo $baris->nis; ?></td>
                           <td><?php echo $baris->nama_lengkap; ?></td>
                           <td><?php echo $baris->telp; ?></td>
-                          <td><?php echo $nama_pemb; ?></td>
+                          <td><?php if($baris->$nama_pemb==null): ?>
+                            Belum Ada Pembimbing 
+                            <?php else: ?>
+                              <?=$baris->name_pembing?>
+                              <?php endif; ?>
+                          </td>
                           <td>
                             <a href="users/pengguna/d_siswa/<?php echo $baris->nis; ?>" class="btn btn-info btn-xs"><i class="icon-eye"></i></a>
                             <!-- <a href="users/pengguna/e_siswa/<?php echo $baris->nis; ?>" class="btn btn-success btn-xs"><i class="icon-pencil7"></i></a> -->

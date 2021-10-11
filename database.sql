@@ -1,190 +1,166 @@
--- phpMyAdmin SQL Dump
--- version 4.9.7
--- https://www.phpmyadmin.net/
---
--- Host: localhost:3306
--- Generation Time: Aug 26, 2021 at 09:51 AM
--- Server version: 10.3.30-MariaDB-cll-lve
--- PHP Version: 7.3.28
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `u5533013_kp`
---
-
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Versi server:                 5.7.24 - MySQL Community Server (GPL)
+-- OS Server:                    Win64
+-- HeidiSQL Versi:               11.3.0.6295
 -- --------------------------------------------------------
 
---
--- Table structure for table `tbl_bimbingan`
---
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-CREATE TABLE `tbl_bimbingan` (
-  `kdbimbingan` int(11) NOT NULL,
+-- membuang struktur untuk table prakerin.tbl_bimbingan
+CREATE TABLE IF NOT EXISTS `tbl_bimbingan` (
+  `kdbimbingan` int(11) NOT NULL AUTO_INCREMENT,
   `kdpenempatan` int(11) NOT NULL,
   `nip` char(21) NOT NULL,
   `nis` int(11) NOT NULL,
   `tanggal` date NOT NULL,
   `judul` varchar(50) NOT NULL,
   `catatan` text NOT NULL,
-  `file` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `file` text NOT NULL,
+  PRIMARY KEY (`kdbimbingan`),
+  KEY `kdpenempatan` (`kdpenempatan`),
+  KEY `nis` (`nis`),
+  CONSTRAINT `tbl_bimbingan_ibfk_1` FOREIGN KEY (`kdpenempatan`) REFERENCES `tbl_penempatan` (`kdpenempatan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tbl_bimbingan_ibfk_2` FOREIGN KEY (`nis`) REFERENCES `tbl_siswa` (`nis`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
+-- Membuang data untuk tabel prakerin.tbl_bimbingan: ~2 rows (lebih kurang)
+/*!40000 ALTER TABLE `tbl_bimbingan` DISABLE KEYS */;
+INSERT INTO `tbl_bimbingan` (`kdbimbingan`, `kdpenempatan`, `nip`, `nis`, `tanggal`, `judul`, `catatan`, `file`) VALUES
+	(6, 21, '082285498005', 6400, '2021-10-10', 'testing', 'adad', 'lampiran/bimbingan/andre.PNG'),
+	(7, 18, '123456789', 2015420064, '2021-10-10', 'Test Bimbingan', 'Ini hanya percobaan', 'lampiran/bimbingan/0001.png');
+/*!40000 ALTER TABLE `tbl_bimbingan` ENABLE KEYS */;
 
---
--- Table structure for table `tbl_file`
---
-
-CREATE TABLE `tbl_file` (
-  `kdfile` int(11) NOT NULL,
+-- membuang struktur untuk table prakerin.tbl_file
+CREATE TABLE IF NOT EXISTS `tbl_file` (
+  `kdfile` int(11) NOT NULL AUTO_INCREMENT,
   `judul` varchar(50) NOT NULL,
   `tanggal` date NOT NULL,
   `nama` text NOT NULL,
   `share` int(11) NOT NULL,
-  `keterangan` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `keterangan` text NOT NULL,
+  PRIMARY KEY (`kdfile`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tbl_file`
---
-
+-- Membuang data untuk tabel prakerin.tbl_file: ~1 rows (lebih kurang)
+/*!40000 ALTER TABLE `tbl_file` DISABLE KEYS */;
 INSERT INTO `tbl_file` (`kdfile`, `judul`, `tanggal`, `nama`, `share`, `keterangan`) VALUES
-(2, 'Contoh 1', '2021-08-23', 'x8-sandbox-Apk.png', 0, 'Ini hanya contoh');
+	(2, 'Contoh 1', '2021-08-23', 'x8-sandbox-Apk.png', 0, 'Ini hanya contoh');
+/*!40000 ALTER TABLE `tbl_file` ENABLE KEYS */;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_info`
---
-
-CREATE TABLE `tbl_info` (
-  `kdinfo` int(11) NOT NULL,
+-- membuang struktur untuk table prakerin.tbl_info
+CREATE TABLE IF NOT EXISTS `tbl_info` (
+  `kdinfo` int(11) NOT NULL AUTO_INCREMENT,
   `kdlabel` int(11) NOT NULL,
   `tanggal` date NOT NULL,
   `judul` text NOT NULL,
   `deskripsi` text NOT NULL,
   `gambar` text NOT NULL,
-  `penulis` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `penulis` varchar(50) NOT NULL,
+  PRIMARY KEY (`kdinfo`),
+  KEY `kdlabel` (`kdlabel`),
+  CONSTRAINT `tbl_info_ibfk_1` FOREIGN KEY (`kdlabel`) REFERENCES `tbl_label` (`kdlabel`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
+-- Membuang data untuk tabel prakerin.tbl_info: ~0 rows (lebih kurang)
+/*!40000 ALTER TABLE `tbl_info` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_info` ENABLE KEYS */;
 
---
--- Table structure for table `tbl_jurusan`
---
+-- membuang struktur untuk table prakerin.tbl_jurusan
+CREATE TABLE IF NOT EXISTS `tbl_jurusan` (
+  `kdjurusan` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(50) NOT NULL,
+  PRIMARY KEY (`kdjurusan`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
-CREATE TABLE `tbl_jurusan` (
-  `kdjurusan` int(11) NOT NULL,
-  `nama` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbl_jurusan`
---
-
+-- Membuang data untuk tabel prakerin.tbl_jurusan: ~2 rows (lebih kurang)
+/*!40000 ALTER TABLE `tbl_jurusan` DISABLE KEYS */;
 INSERT INTO `tbl_jurusan` (`kdjurusan`, `nama`) VALUES
-(1, 'TI'),
-(2, 'TS');
+	(1, 'TI'),
+	(2, 'TS');
+/*!40000 ALTER TABLE `tbl_jurusan` ENABLE KEYS */;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_kelas`
---
-
-CREATE TABLE `tbl_kelas` (
-  `kdkelas` int(11) NOT NULL,
+-- membuang struktur untuk table prakerin.tbl_kelas
+CREATE TABLE IF NOT EXISTS `tbl_kelas` (
+  `kdkelas` int(11) NOT NULL AUTO_INCREMENT,
   `kdjurusan` int(11) NOT NULL,
-  `nama` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `nama` varchar(20) NOT NULL,
+  PRIMARY KEY (`kdkelas`),
+  KEY `kdjurusan` (`kdjurusan`),
+  CONSTRAINT `tbl_kelas_ibfk_1` FOREIGN KEY (`kdjurusan`) REFERENCES `tbl_jurusan` (`kdjurusan`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tbl_kelas`
---
-
+-- Membuang data untuk tabel prakerin.tbl_kelas: ~2 rows (lebih kurang)
+/*!40000 ALTER TABLE `tbl_kelas` DISABLE KEYS */;
 INSERT INTO `tbl_kelas` (`kdkelas`, `kdjurusan`, `nama`) VALUES
-(1, 1, '1 B'),
-(2, 2, '1A');
+	(1, 1, '1 B'),
+	(2, 2, '1A');
+/*!40000 ALTER TABLE `tbl_kelas` ENABLE KEYS */;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_label`
---
-
-CREATE TABLE `tbl_label` (
-  `kdlabel` int(11) NOT NULL,
+-- membuang struktur untuk table prakerin.tbl_label
+CREATE TABLE IF NOT EXISTS `tbl_label` (
+  `kdlabel` int(11) NOT NULL AUTO_INCREMENT,
   `nama_label` varchar(50) NOT NULL,
-  `keterangan` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `keterangan` text NOT NULL,
+  PRIMARY KEY (`kdlabel`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tbl_label`
---
-
+-- Membuang data untuk tabel prakerin.tbl_label: ~5 rows (lebih kurang)
+/*!40000 ALTER TABLE `tbl_label` DISABLE KEYS */;
 INSERT INTO `tbl_label` (`kdlabel`, `nama_label`, `keterangan`) VALUES
-(1, 'Pengumuman', '-'),
-(2, 'Tips', '-'),
-(3, 'Industri', '-'),
-(4, 'Sekolah', '-'),
-(5, 'Lain-lain', '-');
+	(1, 'Pengumuman', '-'),
+	(2, 'Tips', '-'),
+	(3, 'Industri', '-'),
+	(4, 'Sekolah', '-'),
+	(5, 'Lain-lain', '-');
+/*!40000 ALTER TABLE `tbl_label` ENABLE KEYS */;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_nilai`
---
-
-CREATE TABLE `tbl_nilai` (
-  `kdnilai` int(11) NOT NULL,
+-- membuang struktur untuk table prakerin.tbl_nilai
+CREATE TABLE IF NOT EXISTS `tbl_nilai` (
+  `kdnilai` int(11) NOT NULL AUTO_INCREMENT,
   `kdpenempatan` int(11) NOT NULL,
   `keterangan` enum('Teknis','Non-Teknis','Laporan') NOT NULL,
-  `nilai` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `nilai` double NOT NULL,
+  PRIMARY KEY (`kdnilai`),
+  KEY `kdpenempatan` (`kdpenempatan`),
+  CONSTRAINT `tbl_nilai_ibfk_1` FOREIGN KEY (`kdpenempatan`) REFERENCES `tbl_penempatan` (`kdpenempatan`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
+-- Membuang data untuk tabel prakerin.tbl_nilai: ~0 rows (lebih kurang)
+/*!40000 ALTER TABLE `tbl_nilai` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_nilai` ENABLE KEYS */;
 
---
--- Table structure for table `tbl_pemb`
---
-
-CREATE TABLE `tbl_pemb` (
-  `kdpemb` int(11) NOT NULL,
+-- membuang struktur untuk table prakerin.tbl_pemb
+CREATE TABLE IF NOT EXISTS `tbl_pemb` (
+  `kdpemb` int(11) NOT NULL AUTO_INCREMENT,
   `kdjurusan` int(11) NOT NULL,
   `username` varchar(32) NOT NULL,
   `password` text NOT NULL,
   `nip` char(21) NOT NULL,
   `nama_lengkap` varchar(50) NOT NULL,
-  `wilayah` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `wilayah` varchar(50) NOT NULL,
+  PRIMARY KEY (`kdpemb`),
+  KEY `kdjurusan` (`kdjurusan`),
+  CONSTRAINT `tbl_pemb_ibfk_1` FOREIGN KEY (`kdjurusan`) REFERENCES `tbl_jurusan` (`kdjurusan`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tbl_pemb`
---
-
+-- Membuang data untuk tabel prakerin.tbl_pemb: ~2 rows (lebih kurang)
+/*!40000 ALTER TABLE `tbl_pemb` DISABLE KEYS */;
 INSERT INTO `tbl_pemb` (`kdpemb`, `kdjurusan`, `username`, `password`, `nip`, `nama_lengkap`, `wilayah`) VALUES
-(3, 1, 'muhammad', 'a7777999e260290f68a1455cacdabf6c', '123456789', 'Muhammad Ansori', 'Surabaya');
+	(3, 1, 'muhammad', 'a7777999e260290f68a1455cacdabf6c', '123456789', 'Muhammad Ansori', 'Surabaya'),
+	(5, 1, 'lutvi', '7e96f0a92e84e79e04c4da1c83b64755', '082285498005', 'Lutvi', 'Padang');
+/*!40000 ALTER TABLE `tbl_pemb` ENABLE KEYS */;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_penempatan`
---
-
-CREATE TABLE `tbl_penempatan` (
-  `kdpenempatan` int(11) NOT NULL,
+-- membuang struktur untuk table prakerin.tbl_penempatan
+CREATE TABLE IF NOT EXISTS `tbl_penempatan` (
+  `kdpenempatan` int(11) NOT NULL AUTO_INCREMENT,
   `nis` int(11) NOT NULL,
-  `kdpemb` int(11) NOT NULL,
+  `kdpemb` int(11) DEFAULT NULL,
   `nama_industri` varchar(225) NOT NULL,
   `tanggal` date NOT NULL,
   `wilayah` varchar(50) NOT NULL,
@@ -192,319 +168,91 @@ CREATE TABLE `tbl_penempatan` (
   `status` enum('-','proses','ditolak','diterima') NOT NULL,
   `surat` text NOT NULL,
   `deskripsi` varchar(225) NOT NULL,
-  `alamat` varchar(225) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `alamat` varchar(225) NOT NULL,
+  PRIMARY KEY (`kdpenempatan`),
+  KEY `nis` (`nis`),
+  CONSTRAINT `tbl_penempatan_ibfk_2` FOREIGN KEY (`nis`) REFERENCES `tbl_siswa` (`nis`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tbl_penempatan`
---
-
+-- Membuang data untuk tabel prakerin.tbl_penempatan: ~3 rows (lebih kurang)
+/*!40000 ALTER TABLE `tbl_penempatan` DISABLE KEYS */;
 INSERT INTO `tbl_penempatan` (`kdpenempatan`, `nis`, `kdpemb`, `nama_industri`, `tanggal`, `wilayah`, `tahun`, `status`, `surat`, `deskripsi`, `alamat`) VALUES
-(18, 2015420064, 3, 'PT PLN', '2021-08-25', 'Surabaya', 2021, 'diterima', 'Surat_Undangan_Soasialisasi_Magang_untuk_Pihak_Kampus.pdf', 'Kegiatan', 'Embong Trengguli');
+	(18, 2015420064, 3, 'PT PLN', '2021-08-25', 'Surabaya', '2021', 'diterima', 'Surat_Undangan_Soasialisasi_Magang_untuk_Pihak_Kampus.pdf', 'Kegiatan', 'Embong Trengguli'),
+	(21, 6400, 5, 'Teknik', '2021-10-10', '1', '2021', 'diterima', '00022.png', 'dabdalda', 'antahlan'),
+	(22, 123456, 3, 'PT Coba', '2021-10-10', 'Surabaya', '2021', 'diterima', '0001.png', 'Jasa', 'Surabaya');
+/*!40000 ALTER TABLE `tbl_penempatan` ENABLE KEYS */;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_siswa`
---
-
-CREATE TABLE `tbl_siswa` (
+-- membuang struktur untuk table prakerin.tbl_siswa
+CREATE TABLE IF NOT EXISTS `tbl_siswa` (
   `nis` int(11) NOT NULL,
   `kdkelas` int(11) NOT NULL,
   `nama_lengkap` varchar(50) NOT NULL,
   `telp` varchar(14) NOT NULL,
   `foto` text NOT NULL,
   `password` text NOT NULL,
-  `kdpemb` int(11) NOT NULL
+  `kdpemb` int(11) DEFAULT NULL,
+  PRIMARY KEY (`nis`),
+  KEY `kdkelas` (`kdkelas`),
+  CONSTRAINT `tbl_siswa_ibfk_1` FOREIGN KEY (`kdkelas`) REFERENCES `tbl_kelas` (`kdkelas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tbl_siswa`
---
-
+-- Membuang data untuk tabel prakerin.tbl_siswa: ~3 rows (lebih kurang)
+/*!40000 ALTER TABLE `tbl_siswa` DISABLE KEYS */;
 INSERT INTO `tbl_siswa` (`nis`, `kdkelas`, `nama_lengkap`, `telp`, `foto`, `password`, `kdpemb`) VALUES
-(2015420064, 1, 'Muz Ammar', '082331484634', 'Photo.png', '734794bbc555664f529dc7b5ad485714', 3);
+	(6400, 1, 'budi', '082285498005', '11.PNG', 'd6dabcc412981d56c8733b52586a9d44', 5),
+	(123456, 1, 'Khairon', '082285498005', '0001.png', 'e10adc3949ba59abbe56e057f20f883e', 3),
+	(2015420064, 1, 'Muz Ammar', '082331484634', 'Photo.png', '734794bbc555664f529dc7b5ad485714', 3);
+/*!40000 ALTER TABLE `tbl_siswa` ENABLE KEYS */;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_status_pendaftaran`
---
-
-CREATE TABLE `tbl_status_pendaftaran` (
+-- membuang struktur untuk table prakerin.tbl_status_pendaftaran
+CREATE TABLE IF NOT EXISTS `tbl_status_pendaftaran` (
   `id` int(11) NOT NULL,
-  `status` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL
+  `status` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `tbl_status_pendaftaran`
---
-
+-- Membuang data untuk tabel prakerin.tbl_status_pendaftaran: ~1 rows (lebih kurang)
+/*!40000 ALTER TABLE `tbl_status_pendaftaran` DISABLE KEYS */;
 INSERT INTO `tbl_status_pendaftaran` (`id`, `status`) VALUES
-(1, '1');
+	(1, '1');
+/*!40000 ALTER TABLE `tbl_status_pendaftaran` ENABLE KEYS */;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_tolak_penempatan`
---
-
-CREATE TABLE `tbl_tolak_penempatan` (
-  `kdtolak` int(11) NOT NULL,
+-- membuang struktur untuk table prakerin.tbl_tolak_penempatan
+CREATE TABLE IF NOT EXISTS `tbl_tolak_penempatan` (
+  `kdtolak` int(11) NOT NULL AUTO_INCREMENT,
   `kdpenempatan` int(11) NOT NULL,
   `tanggal` date NOT NULL,
-  `alasan` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `alasan` text NOT NULL,
+  PRIMARY KEY (`kdtolak`),
+  KEY `kdpenempatan` (`kdpenempatan`),
+  CONSTRAINT `tbl_tolak_penempatan_ibfk_1` FOREIGN KEY (`kdpenempatan`) REFERENCES `tbl_penempatan` (`kdpenempatan`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tbl_tolak_penempatan`
---
-
+-- Membuang data untuk tabel prakerin.tbl_tolak_penempatan: ~1 rows (lebih kurang)
+/*!40000 ALTER TABLE `tbl_tolak_penempatan` DISABLE KEYS */;
 INSERT INTO `tbl_tolak_penempatan` (`kdtolak`, `kdpenempatan`, `tanggal`, `alasan`) VALUES
-(4, 18, '2021-08-25', 'sorry');
+	(4, 18, '2021-08-25', 'sorry');
+/*!40000 ALTER TABLE `tbl_tolak_penempatan` ENABLE KEYS */;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_user`
---
-
-CREATE TABLE `tbl_user` (
-  `id_user` int(11) NOT NULL,
+-- membuang struktur untuk table prakerin.tbl_user
+CREATE TABLE IF NOT EXISTS `tbl_user` (
+  `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(32) NOT NULL,
   `nama_lengkap` varchar(50) NOT NULL,
   `identitas` varchar(32) NOT NULL,
   `password` text NOT NULL,
   `status` varchar(11) NOT NULL,
-  `foto` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `foto` text NOT NULL,
+  PRIMARY KEY (`id_user`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tbl_user`
---
-
+-- Membuang data untuk tabel prakerin.tbl_user: 1 rows
+/*!40000 ALTER TABLE `tbl_user` DISABLE KEYS */;
 INSERT INTO `tbl_user` (`id_user`, `username`, `nama_lengkap`, `identitas`, `password`, `status`, `foto`) VALUES
-(1, 'admin', 'Heri Mukti', '', '21232f297a57a5a743894a0e4a801fc3', '-', 'Photo.png');
+	(1, 'admin', 'Heri Mukti', '', '21232f297a57a5a743894a0e4a801fc3', '-', 'Photo.png');
+/*!40000 ALTER TABLE `tbl_user` ENABLE KEYS */;
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `tbl_bimbingan`
---
-ALTER TABLE `tbl_bimbingan`
-  ADD PRIMARY KEY (`kdbimbingan`),
-  ADD KEY `kdpenempatan` (`kdpenempatan`),
-  ADD KEY `nis` (`nis`);
-
---
--- Indexes for table `tbl_file`
---
-ALTER TABLE `tbl_file`
-  ADD PRIMARY KEY (`kdfile`);
-
---
--- Indexes for table `tbl_info`
---
-ALTER TABLE `tbl_info`
-  ADD PRIMARY KEY (`kdinfo`),
-  ADD KEY `kdlabel` (`kdlabel`);
-
---
--- Indexes for table `tbl_jurusan`
---
-ALTER TABLE `tbl_jurusan`
-  ADD PRIMARY KEY (`kdjurusan`);
-
---
--- Indexes for table `tbl_kelas`
---
-ALTER TABLE `tbl_kelas`
-  ADD PRIMARY KEY (`kdkelas`),
-  ADD KEY `kdjurusan` (`kdjurusan`);
-
---
--- Indexes for table `tbl_label`
---
-ALTER TABLE `tbl_label`
-  ADD PRIMARY KEY (`kdlabel`);
-
---
--- Indexes for table `tbl_nilai`
---
-ALTER TABLE `tbl_nilai`
-  ADD PRIMARY KEY (`kdnilai`),
-  ADD KEY `kdpenempatan` (`kdpenempatan`);
-
---
--- Indexes for table `tbl_pemb`
---
-ALTER TABLE `tbl_pemb`
-  ADD PRIMARY KEY (`kdpemb`),
-  ADD KEY `kdjurusan` (`kdjurusan`);
-
---
--- Indexes for table `tbl_penempatan`
---
-ALTER TABLE `tbl_penempatan`
-  ADD PRIMARY KEY (`kdpenempatan`),
-  ADD KEY `kdpemb` (`kdpemb`),
-  ADD KEY `nis` (`nis`);
-
---
--- Indexes for table `tbl_siswa`
---
-ALTER TABLE `tbl_siswa`
-  ADD PRIMARY KEY (`nis`),
-  ADD KEY `kdpemb` (`kdpemb`),
-  ADD KEY `kdkelas` (`kdkelas`);
-
---
--- Indexes for table `tbl_status_pendaftaran`
---
-ALTER TABLE `tbl_status_pendaftaran`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_tolak_penempatan`
---
-ALTER TABLE `tbl_tolak_penempatan`
-  ADD PRIMARY KEY (`kdtolak`),
-  ADD KEY `kdpenempatan` (`kdpenempatan`);
-
---
--- Indexes for table `tbl_user`
---
-ALTER TABLE `tbl_user`
-  ADD PRIMARY KEY (`id_user`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `tbl_bimbingan`
---
-ALTER TABLE `tbl_bimbingan`
-  MODIFY `kdbimbingan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `tbl_file`
---
-ALTER TABLE `tbl_file`
-  MODIFY `kdfile` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `tbl_info`
---
-ALTER TABLE `tbl_info`
-  MODIFY `kdinfo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `tbl_jurusan`
---
-ALTER TABLE `tbl_jurusan`
-  MODIFY `kdjurusan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `tbl_kelas`
---
-ALTER TABLE `tbl_kelas`
-  MODIFY `kdkelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `tbl_label`
---
-ALTER TABLE `tbl_label`
-  MODIFY `kdlabel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `tbl_nilai`
---
-ALTER TABLE `tbl_nilai`
-  MODIFY `kdnilai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `tbl_pemb`
---
-ALTER TABLE `tbl_pemb`
-  MODIFY `kdpemb` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `tbl_penempatan`
---
-ALTER TABLE `tbl_penempatan`
-  MODIFY `kdpenempatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
--- AUTO_INCREMENT for table `tbl_tolak_penempatan`
---
-ALTER TABLE `tbl_tolak_penempatan`
-  MODIFY `kdtolak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `tbl_user`
---
-ALTER TABLE `tbl_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `tbl_bimbingan`
---
-ALTER TABLE `tbl_bimbingan`
-  ADD CONSTRAINT `tbl_bimbingan_ibfk_1` FOREIGN KEY (`kdpenempatan`) REFERENCES `tbl_penempatan` (`kdpenempatan`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tbl_bimbingan_ibfk_2` FOREIGN KEY (`nis`) REFERENCES `tbl_siswa` (`nis`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tbl_info`
---
-ALTER TABLE `tbl_info`
-  ADD CONSTRAINT `tbl_info_ibfk_1` FOREIGN KEY (`kdlabel`) REFERENCES `tbl_label` (`kdlabel`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tbl_kelas`
---
-ALTER TABLE `tbl_kelas`
-  ADD CONSTRAINT `tbl_kelas_ibfk_1` FOREIGN KEY (`kdjurusan`) REFERENCES `tbl_jurusan` (`kdjurusan`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tbl_nilai`
---
-ALTER TABLE `tbl_nilai`
-  ADD CONSTRAINT `tbl_nilai_ibfk_1` FOREIGN KEY (`kdpenempatan`) REFERENCES `tbl_penempatan` (`kdpenempatan`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tbl_pemb`
---
-ALTER TABLE `tbl_pemb`
-  ADD CONSTRAINT `tbl_pemb_ibfk_1` FOREIGN KEY (`kdjurusan`) REFERENCES `tbl_jurusan` (`kdjurusan`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tbl_penempatan`
---
-ALTER TABLE `tbl_penempatan`
-  ADD CONSTRAINT `tbl_penempatan_ibfk_1` FOREIGN KEY (`kdpemb`) REFERENCES `tbl_pemb` (`kdpemb`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `tbl_penempatan_ibfk_2` FOREIGN KEY (`nis`) REFERENCES `tbl_siswa` (`nis`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tbl_siswa`
---
-ALTER TABLE `tbl_siswa`
-  ADD CONSTRAINT `tbl_siswa_ibfk_1` FOREIGN KEY (`kdkelas`) REFERENCES `tbl_kelas` (`kdkelas`),
-  ADD CONSTRAINT `tbl_siswa_ibfk_2` FOREIGN KEY (`kdpemb`) REFERENCES `tbl_pemb` (`kdpemb`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `tbl_tolak_penempatan`
---
-ALTER TABLE `tbl_tolak_penempatan`
-  ADD CONSTRAINT `tbl_tolak_penempatan_ibfk_1` FOREIGN KEY (`kdpenempatan`) REFERENCES `tbl_penempatan` (`kdpenempatan`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-COMMIT;
-
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
