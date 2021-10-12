@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
--- Host:                         127.0.0.1
+-- Host:                         localhost
 -- Versi server:                 5.7.24 - MySQL Community Server (GPL)
 -- OS Server:                    Win64
--- HeidiSQL Versi:               11.3.0.6295
+-- HeidiSQL Versi:               10.2.0.5599
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -10,7 +10,6 @@
 /*!50503 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 -- membuang struktur untuk table prakerin.tbl_bimbingan
 CREATE TABLE IF NOT EXISTS `tbl_bimbingan` (
@@ -22,18 +21,20 @@ CREATE TABLE IF NOT EXISTS `tbl_bimbingan` (
   `judul` varchar(50) NOT NULL,
   `catatan` text NOT NULL,
   `file` text NOT NULL,
+  `source` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`kdbimbingan`),
   KEY `kdpenempatan` (`kdpenempatan`),
   KEY `nis` (`nis`),
   CONSTRAINT `tbl_bimbingan_ibfk_1` FOREIGN KEY (`kdpenempatan`) REFERENCES `tbl_penempatan` (`kdpenempatan`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tbl_bimbingan_ibfk_2` FOREIGN KEY (`nis`) REFERENCES `tbl_siswa` (`nis`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
--- Membuang data untuk tabel prakerin.tbl_bimbingan: ~2 rows (lebih kurang)
+-- Membuang data untuk tabel prakerin.tbl_bimbingan: ~3 rows (lebih kurang)
 /*!40000 ALTER TABLE `tbl_bimbingan` DISABLE KEYS */;
-INSERT INTO `tbl_bimbingan` (`kdbimbingan`, `kdpenempatan`, `nip`, `nis`, `tanggal`, `judul`, `catatan`, `file`) VALUES
-	(6, 21, '082285498005', 6400, '2021-10-10', 'testing', 'adad', 'lampiran/bimbingan/andre.PNG'),
-	(7, 18, '123456789', 2015420064, '2021-10-10', 'Test Bimbingan', 'Ini hanya percobaan', 'lampiran/bimbingan/0001.png');
+INSERT INTO `tbl_bimbingan` (`kdbimbingan`, `kdpenempatan`, `nip`, `nis`, `tanggal`, `judul`, `catatan`, `file`, `source`) VALUES
+	(6, 21, '082285498005', 6400, '2021-10-10', 'testing', 'adad', 'lampiran/bimbingan/andre.PNG', 'pembimbing'),
+	(7, 18, '123456789', 2015420064, '2021-10-10', 'Test Bimbingan', 'Ini hanya percobaan', 'lampiran/bimbingan/0001.png', ''),
+	(9, 21, '082285498005', 6400, '2021-10-12', 'bimbingan 1', 'ini bimbingan yang saya buat pak ', 'lampiran/bimbingan/1._SPESIFIKASI_TEKNIK_Rehab_DPRD5.pdf', 'siswa');
 /*!40000 ALTER TABLE `tbl_bimbingan` ENABLE KEYS */;
 
 -- membuang struktur untuk table prakerin.tbl_file
@@ -47,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `tbl_file` (
   PRIMARY KEY (`kdfile`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Membuang data untuk tabel prakerin.tbl_file: ~1 rows (lebih kurang)
+-- Membuang data untuk tabel prakerin.tbl_file: ~0 rows (lebih kurang)
 /*!40000 ALTER TABLE `tbl_file` DISABLE KEYS */;
 INSERT INTO `tbl_file` (`kdfile`, `judul`, `tanggal`, `nama`, `share`, `keterangan`) VALUES
 	(2, 'Contoh 1', '2021-08-23', 'x8-sandbox-Apk.png', 0, 'Ini hanya contoh');
@@ -65,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `tbl_info` (
   PRIMARY KEY (`kdinfo`),
   KEY `kdlabel` (`kdlabel`),
   CONSTRAINT `tbl_info_ibfk_1` FOREIGN KEY (`kdlabel`) REFERENCES `tbl_label` (`kdlabel`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Membuang data untuk tabel prakerin.tbl_info: ~0 rows (lebih kurang)
 /*!40000 ALTER TABLE `tbl_info` DISABLE KEYS */;
@@ -129,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `tbl_nilai` (
   PRIMARY KEY (`kdnilai`),
   KEY `kdpenempatan` (`kdpenempatan`),
   CONSTRAINT `tbl_nilai_ibfk_1` FOREIGN KEY (`kdpenempatan`) REFERENCES `tbl_penempatan` (`kdpenempatan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Membuang data untuk tabel prakerin.tbl_nilai: ~0 rows (lebih kurang)
 /*!40000 ALTER TABLE `tbl_nilai` DISABLE KEYS */;
@@ -211,7 +212,7 @@ CREATE TABLE IF NOT EXISTS `tbl_status_pendaftaran` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel prakerin.tbl_status_pendaftaran: ~1 rows (lebih kurang)
+-- Membuang data untuk tabel prakerin.tbl_status_pendaftaran: ~0 rows (lebih kurang)
 /*!40000 ALTER TABLE `tbl_status_pendaftaran` DISABLE KEYS */;
 INSERT INTO `tbl_status_pendaftaran` (`id`, `status`) VALUES
 	(1, '1');
@@ -228,7 +229,7 @@ CREATE TABLE IF NOT EXISTS `tbl_tolak_penempatan` (
   CONSTRAINT `tbl_tolak_penempatan_ibfk_1` FOREIGN KEY (`kdpenempatan`) REFERENCES `tbl_penempatan` (`kdpenempatan`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- Membuang data untuk tabel prakerin.tbl_tolak_penempatan: ~1 rows (lebih kurang)
+-- Membuang data untuk tabel prakerin.tbl_tolak_penempatan: ~0 rows (lebih kurang)
 /*!40000 ALTER TABLE `tbl_tolak_penempatan` DISABLE KEYS */;
 INSERT INTO `tbl_tolak_penempatan` (`kdtolak`, `kdpenempatan`, `tanggal`, `alasan`) VALUES
 	(4, 18, '2021-08-25', 'sorry');
@@ -253,6 +254,5 @@ INSERT INTO `tbl_user` (`id_user`, `username`, `nama_lengkap`, `identitas`, `pas
 /*!40000 ALTER TABLE `tbl_user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;

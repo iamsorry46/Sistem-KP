@@ -31,7 +31,7 @@ $sub_menu3 = strtolower($this->uri->segment(3)); ?>
                       <th>Nama Siswa</th>
                       <th>Kelas</th>
                       <th>Nama Pembimbing</th>
-                      <th class="text-center" width="30">Aksi</th>
+                      <th class="text-center" width="200">Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -64,6 +64,7 @@ $sub_menu3 = strtolower($this->uri->segment(3)); ?>
                           <td><?php echo $kelas; ?> <?php echo $jurusan; ?></td>
                           <td><?php echo $nama_pemb; ?></td>
                           <td>
+                            <a class="btn btn-success btn-sm" href="<?=base_url('users/bimbingan_dosen/'.$baris->nis)?>">Bimbingan</a>
                             <a href="users/d_siswa/d/<?php echo $baris->nis; ?>" class="btn btn-info btn-xs"><i class="icon-eye"></i></a>
                           </td>
                         </tr>

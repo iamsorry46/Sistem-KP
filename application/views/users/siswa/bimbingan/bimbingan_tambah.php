@@ -28,7 +28,7 @@ $( function() {
           <?php
           echo $this->session->flashdata('msg');
           ?>
-          <form action="" method="post" enctype="multipart/form-data">
+          <form action="<?=base_url('costume/simpanBimbinganSiswa')?>" method="post" enctype="multipart/form-data">
             
             <div class="col-sm-12 pull-left" style="margin-top: 10px;">
               <label for="judul"><b>Judul</b></label>

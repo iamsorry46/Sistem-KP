@@ -58,7 +58,6 @@ class Costume extends CI_Controller
             redirect('web/login');
         } else {
 
-
             $data['user'] = $this->Mcrud->get_pemb_by_un($ceks);
             $this->db->join('tbl_siswa', 'tbl_siswa.nis=tbl_bimbingan.nis');
             $this->db->where('nip', $id_user);
@@ -165,6 +164,7 @@ class Costume extends CI_Controller
                             'judul' => $judul,
                             'catatan' => $catatan,
                             'file' => $file,
+                            'status'=>'siswa'
                         );
                         $this->db->insert('tbl_bimbingan', $data);
 
@@ -184,12 +184,11 @@ class Costume extends CI_Controller
 
         }
     }
-public function simpanBimbinganSiswa(Type $var = null)
-{
-    $ceks = $this->session->userdata('prakrin_smk@Proyek-2017');
-    $id_user = $this->session->userdata('id_user@Proyek-2017');
-    $level = $this->session->userdata('level@Proyek-2017');
-    if (isset($_POST['btnsimpan'])) {
+    public function simpanBimbinganSiswa(Type $var = null)
+    {
+        $ceks = $this->session->userdata('prakrin_smk@Proyek-2017');
+        $id_user = $this->session->userdata('id_user@Proyek-2017');
+        $level = $this->session->userdata('level@Proyek-2017');
         $nis = htmlentities(strip_tags($this->input->post('nis')));
         $judul = htmlentities(strip_tags($this->input->post('judul')));
         $catatan = htmlentities(strip_tags($this->input->post('catatan')));
@@ -197,70 +196,71 @@ public function simpanBimbinganSiswa(Type $var = null)
         date_default_timezone_set('Asia/Jakarta');
         $tgl = date('Y-m-d');
 
-        $cek_penempatan = $this->db->get_where('tbl_penempatan', "nis='$nis'");
+        $cek_penempatan = $this->db->get_where('tbl_penempatan', "nis='$id_user'");
         if ($cek_penempatan->num_rows() == 0) {
-            $this->session->set_flashdata('msg',
-                '
-                        <div class="alert alert-warning alert-dismissible" role="alert">
-                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                 <span aria-hidden="true">&times;&nbsp; &nbsp;</span>
-                             </button>
-                             <strong>Gagal!</strong> Mahasiswa belum menentukan tempat.
-                        </div>'
-            );
-            redirect('users/nilai/t');
-        } else {
+                    $this->session->set_flashdata('msg',
+                        '
+                                <div class="alert alert-warning alert-dismissible" role="alert">
+                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                         <span aria-hidden="true">&times;&nbsp; &nbsp;</span>
+                                     </button>
+                                     <strong>Gagal!</strong> Mahasiswa belum menentukan tempat.
+                                </div>'
+                    );
+                    redirect('users/buat_bimbingan/t');
+                } else {
 
-            $file_size = 1024 * 5; //5 MB
-            $this->upload->initialize(array(
-                "upload_path" => "./lampiran/bimbingan/",
-                "allowed_types" => "*",
-                "max_size" => "$file_size",
-            ));
+                    $file_size = 1024 * 5; //5 MB
+                    $this->upload->initialize(array(
+                        "upload_path" => "./lampiran/bimbingan/",
+                        "allowed_types" => "*",
+                        "max_size" => "$file_size",
+                    ));
 
-            if (!$this->upload->do_upload('file')) {
-                $error = $this->upload->display_errors('<p>', '</p>');
-                $this->session->set_flashdata('msg_file',
-                    '
-                                         <div class="alert alert-warning alert-dismissible" role="alert">
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times; &nbsp;</span>
-                                                </button>
-                                                <strong>Gagal!</strong> ' . $error . '.
-                                         </div>'
-                );
+                    if (!$this->upload->do_upload('file')) {
+                        $error = $this->upload->display_errors('<p>', '</p>');
+                        $this->session->set_flashdata('msg_file',
+                            '
+                                                 <div class="alert alert-warning alert-dismissible" role="alert">
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times; &nbsp;</span>
+                                                        </button>
+                                                        <strong>Gagal!</strong> ' . $error . '.
+                                                 </div>'
+                        );
 
-                redirect('users/bimbingan/t');
-            } else {
-                $file = $this->upload->data();
-                $filename = "lampiran/bimbingan/" . $file['file_name'];
-                $file = preg_replace('/ /', '_', $filename);
+                        redirect('users/buat_bimbingan/t');
+                    } else {
+                        $file = $this->upload->data();
+                        $filename = "lampiran/bimbingan/" . $file['file_name'];
+                        $file = preg_replace('/ /', '_', $filename);
+                        $checkPembimbing=$this->model->findData('tbl_siswa','nis',$id_user)->row();
+                        $pembimbing=$this->model->findData('tbl_pemb','kdpemb',$checkPembimbing->kdpemb)->row();
+                        $data = array(
+                            'kdpenempatan' => $cek_penempatan->row()->kdpenempatan,
+                            'nip' => $pembimbing->nip,
+                            'nis' => $id_user,
+                            'tanggal' => $tgl,
+                            'judul' => $judul,
+                            'catatan' => $catatan,
+                            'file' => $file,
+                        );
+                        $this->db->insert('tbl_bimbingan', $data);
+                        $this->session->set_flashdata('msg',
+                            '
+                                            <div class="alert alert-success alert-dismissible" role="alert">
+                                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                     <span aria-hidden="true">&times;&nbsp; &nbsp;</span>
+                                                 </button>
+                                                 <strong>Sukses!</strong> Bimbingan berhasil dikirim.
+                                            </div>'
+                        );
+                        // echo json_encode($data);
+                        redirect('users/bimbingan_siswa');
+                    }
 
-                $data = array(
-                    'kdpenempatan' => $cek_penempatan->row()->kdpenempatan,
-                    'nip' => $id_user,
-                    'nis' => $nis,
-                    'tanggal' => $tgl,
-                    'judul' => $judul,
-                    'catatan' => $catatan,
-                    'file' => $file,
-                );
-                $this->db->insert('tbl_bimbingan', $data);
-
-                $this->session->set_flashdata('msg',
-                    '
-                                    <div class="alert alert-success alert-dismissible" role="alert">
-                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                             <span aria-hidden="true">&times;&nbsp; &nbsp;</span>
-                                         </button>
-                                         <strong>Sukses!</strong> Bimbingan berhasil dikirim.
-                                    </div>'
-                );
-                redirect('users/bimbingan');
-            }
         }
     }
-}
 
 }
 

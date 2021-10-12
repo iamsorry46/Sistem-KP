@@ -241,9 +241,9 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 								<li class="<?php if ($sub_menu == "d_siswa") { echo 'active';}?>"><a
 										href="users/d_siswa"><i class="icon-book3"></i> <span>Daftar Siswa</span></a>
 								</li>
-								<li class="<?php if ($sub_menu == "bimbingan") { echo 'active';}?>"><a
+								<!-- <li class="<?php if ($sub_menu == "bimbingan") { echo 'active';}?>"><a
 										href="users/bimbingan"><i class="icon-pencil7"></i> <span>Bimbingan</span></a>
-								</li>
+								</li> -->
 								<li class="<?php if ($sub_menu == "nilai") { echo 'active';}?>"><a href="users/nilai"><i
 											class="icon-star-full2"></i> <span>Nilai</span></a></li>
 								<?php }elseif ($level == 'Siswa'){?>

@@ -1504,7 +1504,32 @@ $no++;
 
         }
     }
+    public function bimbingan_dosen($nis=null)
+    {
+        $ceks = $this->session->userdata('prakrin_smk@Proyek-2017');
+        $id_user = $this->session->userdata('id_user@Proyek-2017');
+        $level = $this->session->userdata('level@Proyek-2017');
+        if (!isset($ceks)) {
+            redirect('web/login');
+        } else {
+            if ($level != 'pembimbing') {
+                redirect('web/error_not_found');
+            }
 
+            $data['user'] = $this->Mcrud->get_pemb_by_un($ceks);
+           $data['siswa']=$this->model->findData('tbl_siswa','nis',$nis)->row();
+            $data['v_bimbingan'] = $this->model->findData('tbl_bimbingan','nis',$nis)->result();
+            $data['email'] = '';
+            $data['level'] = 'Pembimbing';
+            $p='bimbingan/bimbingan';
+
+            $this->load->view('users/header', $data);
+            $this->load->view("users/pembimbing/$p", $data);
+            $this->load->view('users/footer');
+            // echo json_encode($data['siswa']);
+            
+         }
+    }
     public function bimbingan($aksi = '', $id = '')
     {
         $ceks = $this->session->userdata('prakrin_smk@Proyek-2017');
@@ -1876,13 +1901,8 @@ $no++;
             }
 
             $data['user'] = $this->Mcrud->get_siswa_by_nis($ceks);
-            $this->db->join('tbl_siswa', 'tbl_siswa.nis=tbl_bimbingan.nis');
-            $this->db->where('tbl_siswa.nis', $id_user);
-            if ($aksi == 'd') {
-                $this->db->where('kdbimbingan', $id);
-            }
-            $this->db->order_by('kdbimbingan', 'DESC');
-            $data['v_bimbingan'] = $this->db->get('tbl_bimbingan');
+          
+            $data['v_bimbingan'] = $this->model->findData('tbl_bimbingan','nis',$id_user)->result();
             $data['email'] = '';
             $data['level'] = 'Siswa';
 
