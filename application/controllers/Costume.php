@@ -244,6 +244,7 @@ class Costume extends CI_Controller
                             'judul' => $judul,
                             'catatan' => $catatan,
                             'file' => $file,
+                            'source'=>'siswa'
                         );
                         $this->db->insert('tbl_bimbingan', $data);
                         $this->session->set_flashdata('msg',
