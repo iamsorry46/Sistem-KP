@@ -7,7 +7,6 @@ $( function() {
 <div class="content-wrapper">
   <!-- Content area -->
   <div class="content">
-
     <!-- Dashboard content -->
 
   <div class="row">
