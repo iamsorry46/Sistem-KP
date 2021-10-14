@@ -1518,17 +1518,121 @@ $no++;
 
             $data['user'] = $this->Mcrud->get_pemb_by_un($ceks);
            $data['siswa']=$this->model->findData('tbl_siswa','nis',$nis)->row();
-            $data['v_bimbingan'] = $this->model->findData('tbl_bimbingan','nis',$nis)->result();
+            $data['v_bimbingan'] = $this->model->getDataBimbinganSiswa($nis);
             $data['email'] = '';
             $data['level'] = 'Pembimbing';
             $p='bimbingan/bimbingan';
-
+            $data['nis']=$nis;
             $this->load->view('users/header', $data);
             $this->load->view("users/pembimbing/$p", $data);
             $this->load->view('users/footer');
             // echo json_encode($data['siswa']);
             
          }
+    }
+    public function tambahBimbingan($nis=null)
+    {
+        $id_user = $this->session->userdata('id_user@Proyek-2017');
+        $ceks = $this->session->userdata('prakrin_smk@Proyek-2017');
+        $data['user'] = $this->Mcrud->get_pemb_by_un($ceks);
+        $pembimbing = $this->model->findData('tbl_pemb', 'nip', $id_user)->row()->kdpemb;
+        $data['v_siswa']=$this->db->from('tbl_siswa')->where('kdpemb',$pembimbing)->get();
+        $data['nis']=$nis;
+        $p = "bimbingan/bimbingan_tambah";
+        $this->load->view('users/header', $data);
+        $this->load->view("users/pembimbing/$p", $data);
+        $this->load->view('users/footer');
+    }
+    public function simpanBimbinganDosen($nis)
+    {
+        $ceks = $this->session->userdata('prakrin_smk@Proyek-2017');
+        $id_user = $this->session->userdata('id_user@Proyek-2017');
+        $level = $this->session->userdata('level@Proyek-2017');
+        $nis = htmlentities(strip_tags($this->input->post('nis')));
+        $judul = htmlentities(strip_tags($this->input->post('judul')));
+        $catatan = htmlentities(strip_tags($this->input->post('catatan')));
+
+        date_default_timezone_set('Asia/Jakarta');
+        $tgl = date('Y-m-d');
+
+        $cek_penempatan = $this->db->get_where('tbl_penempatan', "nis='$nis'");
+        if ($cek_penempatan->num_rows() == 0) {
+            $this->session->set_flashdata('msg',
+                '
+                                <div class="alert alert-warning alert-dismissible" role="alert">
+                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                         <span aria-hidden="true">&times;&nbsp; &nbsp;</span>
+                                     </button>
+                                     <strong>Gagal!</strong> Mahasiswa belum menentukan tempat.
+                                </div>'
+            );
+            redirect('users/bimbingan_dosen/'.$nis);
+        } else {
+
+            $file_size = 1024 * 5; //5 MB
+            $this->upload->initialize(array(
+                "upload_path" => "./lampiran/bimbingan/",
+                "allowed_types" => "*",
+                "max_size" => "$file_size",
+            ));
+
+            if (!$this->upload->do_upload('file')) {
+                $error = $this->upload->display_errors('<p>', '</p>');
+                $checkPembimbing = $this->model->findData('tbl_siswa', 'nis', $nis)->row();
+                $pembimbing = $this->model->findData('tbl_pemb', 'kdpemb', $checkPembimbing->kdpemb)->row();
+                $data = array(
+                    'kdpenempatan' => $cek_penempatan->row()->kdpenempatan,
+                    'nip' =>$pembimbing->nip,
+                    'nis' => $nis,
+                    'tanggal' => $tgl,
+                    'judul' => $judul,
+                    'catatan' => $catatan,
+                    'source' => 'pembimbing',
+                );
+                $this->db->insert('tbl_bimbingan', $data);
+                $this->session->set_flashdata('msg',
+                    '
+                                            <div class="alert alert-success alert-dismissible" role="alert">
+                                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                     <span aria-hidden="true">&times;&nbsp; &nbsp;</span>
+                                                 </button>
+                                                 <strong>Sukses!</strong> Bimbingan berhasil dikirim.
+                                            </div>'
+                );
+                redirect('users/bimbingan_dosen/'.$nis);
+            } else {
+                $file = $this->upload->data();
+                $filename = "lampiran/bimbingan/" . $file['file_name'];
+                $type=$file['file_ext'];
+                $file = preg_replace('/ /', '_', $filename);
+                $checkPembimbing = $this->model->findData('tbl_siswa', 'nis', $id_user)->row();
+                $pembimbing = $this->model->findData('tbl_pemb', 'kdpemb', $checkPembimbing->kdpemb)->row();
+                $data = array(
+                    'kdpenempatan' => $cek_penempatan->row()->kdpenempatan,
+                    'nip' => $pembimbing->nip,
+                    'nis' => $id_user,
+                    'tanggal' => $tgl,
+                    'judul' => $judul,
+                    'catatan' => $catatan,
+                    'file' => $file,
+                    'source' => 'pembimbing',
+                    'type'=>$type,
+                );
+                $this->db->insert('tbl_bimbingan', $data);
+                $this->session->set_flashdata('msg',
+                    '
+                                            <div class="alert alert-success alert-dismissible" role="alert">
+                                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                     <span aria-hidden="true">&times;&nbsp; &nbsp;</span>
+                                                 </button>
+                                                 <strong>Sukses!</strong> Bimbingan berhasil dikirim.
+                                            </div>'
+                );
+                // echo json_encode($data);
+                redirect('users/bimbingan_dosen/'.$nis);
+            }
+
+        }
     }
     public function bimbingan($aksi = '', $id = '')
     {
@@ -1902,7 +2006,7 @@ $no++;
 
             $data['user'] = $this->Mcrud->get_siswa_by_nis($ceks);
           
-            $data['v_bimbingan'] = $this->model->findData('tbl_bimbingan','nis',$id_user)->result();
+            $data['v_bimbingan'] =$this->model->getDataBimbinganSiswa($id_user);
             $data['email'] = '';
             $data['level'] = 'Siswa';
 
@@ -1919,6 +2023,7 @@ $no++;
             $this->load->view('users/header', $data);
             $this->load->view("users/siswa/$p", $data);
             $this->load->view('users/footer');
+            // echo json_encode($data['v_bimbingan']);
 
         }
     }

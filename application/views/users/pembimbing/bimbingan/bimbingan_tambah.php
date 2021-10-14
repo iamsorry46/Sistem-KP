@@ -28,7 +28,7 @@ $( function() {
           <?php
           echo $this->session->flashdata('msg');
           ?>
-          <form action="" method="post" enctype="multipart/form-data">
+          <form action="<?=base_url('users/simpanBimbinganDosen/'.$nis)?>" method="post" enctype="multipart/form-data">
             <div class="col-sm-12 pull-left" style="margin-top: 10px;">
               <label for="nama"><b>Nama Siswa</b></label>
               <select class="form-control cari_siswa" name="nis" required>
@@ -48,7 +48,7 @@ $( function() {
             </div>
             <div class="col-sm-12 pull-left" style="margin-top: 10px;">
               <label for="file"><b>File</b></label>
-              <input type="file" class="form-control" id="file" name="file" value="" placeholder="File" required>
+              <input type="file" class="form-control" id="file" name="file" value="" placeholder="File" >
               <b style="color:red;font-size:10px;">*Max Size: 5 MB</b>
             </div>
             <div class="col-sm-12 pull-left" style="margin-top: 10px;">

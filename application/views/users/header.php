@@ -90,7 +90,7 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 	</script>
 
 	<?php
-	if ($sub_menu == "" or $sub_menu == "profile" or $sub_menu == "lap_sk" or $sub_menu == "lap_sm" or $sub_menu=='buat_bimbingan') {?>
+	if ($sub_menu == "" or $sub_menu == "profile" or $sub_menu == "lap_sk" or $sub_menu == "lap_sm" or $sub_menu=='buat_bimbingan'or $sub_menu=='tambahBimbingan') {?>
 	<!-- Theme JS files -->
 
 	<link rel="stylesheet" href="assets/calender/css/style.css">
@@ -114,7 +114,7 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 	<?php
 	if ($sub_menu == "info" or $sub_menu == "j_k" or $sub_menu == "pengguna" or $sub_menu == "industri" or $sub_menu == "penempatan" or $sub_menu == "nilai_praktik" or
 	    $sub_menu == "d_siswa" or $sub_menu == "bimbingan" or $sub_menu == "nilai" or
-			$sub_menu == "status_prakerin" or $sub_menu == "bimbingan_siswa" or $sub_menu == "nilai_prakerin" or $sub_menu=="buat_bimbingan") {?>
+			$sub_menu == "status_prakerin" or $sub_menu == "bimbingan_siswa" or $sub_menu == "nilai_prakerin" or $sub_menu=="buat_bimbingan" or $sub_menu=='tambahBimbingan') {?>
 	<!-- Theme JS files -->
 	<script type="text/javascript" src="assets/js/plugins/tables/datatables/datatables.min.js"></script>
 	<script type="text/javascript" src="assets/js/plugins/editors/summernote/summernote.min.js"></script>
@@ -247,7 +247,7 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 								<li class="<?php if ($sub_menu == "nilai") { echo 'active';}?>"><a href="users/nilai"><i
 											class="icon-star-full2"></i> <span>Nilai</span></a></li>
 								<?php }elseif ($level == 'Siswa'){?>
-								<li class="<?php if ($sub_menu == "bimbingan_siswa" || $sub_menu==='buat_bimbingan') { echo 'active';}?>"><a
+								<li class="<?php if ($sub_menu == "bimbingan_siswa" || $sub_menu==='buat_bimbingan'|| $sub_menu=='tambahBimbingan') { echo 'active';}?>"><a
 										href="users/bimbingan_siswa"><i class="icon-envelop5"></i>
 										<span>Bimbingan</span></a></li>
 								<li class="<?php if ($sub_menu == "nilai_prakerin") { echo 'active';}?>"><a

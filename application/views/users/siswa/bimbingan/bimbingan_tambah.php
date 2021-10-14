@@ -40,7 +40,7 @@ $( function() {
             </div>
             <div class="col-sm-12 pull-left" style="margin-top: 10px;">
               <label for="file"><b>File</b></label>
-              <input type="file" class="form-control" id="file" name="file" value="" placeholder="File" required>
+              <input type="file" class="form-control" id="file" name="file" value="" placeholder="File" >
               <b style="color:red;font-size:10px;">*Max Size: 5 MB</b>
             </div>
             <div class="col-sm-12 pull-left" style="margin-top: 10px;">

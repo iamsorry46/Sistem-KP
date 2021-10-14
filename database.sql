@@ -20,21 +20,27 @@ CREATE TABLE IF NOT EXISTS `tbl_bimbingan` (
   `tanggal` date NOT NULL,
   `judul` varchar(50) NOT NULL,
   `catatan` text NOT NULL,
-  `file` text NOT NULL,
+  `file` text,
   `source` varchar(50) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`kdbimbingan`),
   KEY `kdpenempatan` (`kdpenempatan`),
   KEY `nis` (`nis`),
   CONSTRAINT `tbl_bimbingan_ibfk_1` FOREIGN KEY (`kdpenempatan`) REFERENCES `tbl_penempatan` (`kdpenempatan`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tbl_bimbingan_ibfk_2` FOREIGN KEY (`nis`) REFERENCES `tbl_siswa` (`nis`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
--- Membuang data untuk tabel prakerin.tbl_bimbingan: ~3 rows (lebih kurang)
+-- Membuang data untuk tabel prakerin.tbl_bimbingan: ~5 rows (lebih kurang)
 /*!40000 ALTER TABLE `tbl_bimbingan` DISABLE KEYS */;
-INSERT INTO `tbl_bimbingan` (`kdbimbingan`, `kdpenempatan`, `nip`, `nis`, `tanggal`, `judul`, `catatan`, `file`, `source`) VALUES
-	(6, 21, '082285498005', 6400, '2021-10-10', 'testing', 'adad', 'lampiran/bimbingan/andre.PNG', 'pembimbing'),
-	(7, 18, '123456789', 2015420064, '2021-10-10', 'Test Bimbingan', 'Ini hanya percobaan', 'lampiran/bimbingan/0001.png', ''),
-	(9, 21, '082285498005', 6400, '2021-10-12', 'bimbingan 1', 'ini bimbingan yang saya buat pak ', 'lampiran/bimbingan/1._SPESIFIKASI_TEKNIK_Rehab_DPRD5.pdf', 'siswa');
+INSERT INTO `tbl_bimbingan` (`kdbimbingan`, `kdpenempatan`, `nip`, `nis`, `tanggal`, `judul`, `catatan`, `file`, `source`, `type`) VALUES
+	(6, 21, '082285498005', 6400, '2021-10-10', 'testing', 'adad', 'lampiran/bimbingan/andre.PNG', 'pembimbing', NULL),
+	(7, 18, '123456789', 2015420064, '2021-10-10', 'Test Bimbingan', 'Ini hanya percobaan', 'lampiran/bimbingan/0001.png', '', NULL),
+	(9, 21, '082285498005', 6400, '2021-10-12', 'bimbingan 1', 'ini bimbingan yang saya buat pak ', 'lampiran/bimbingan/1._SPESIFIKASI_TEKNIK_Rehab_DPRD5.pdf', 'siswa', NULL),
+	(10, 21, '082285498005', 6400, '2021-10-12', 'dad', 'tes', 'lampiran/bimbingan/Rancangan_Kontrak.pdf', 'siswa', NULL),
+	(11, 21, '082285498005', 6400, '2021-10-12', 'tes2', 'tes2', 'lampiran/bimbingan/1._SPESIFIKASI_TEKNIK_Rehab_DPRD1.pdf', 'siswa', NULL),
+	(12, 21, '082285498005', 6400, '2021-10-14', 'bimbingan', 'catatan', NULL, 'siswa', NULL),
+	(13, 21, '082285498005', 6400, '2021-10-14', 'bimbingan', 'vimbingan', 'lampiran/bimbingan/1._SPESIFIKASI_TEKNIK_Rehab_DPRD2.pdf', 'siswa', '.pdf'),
+	(14, 21, '082285498005', 6400, '2021-10-14', 'dad', 'adad', 'lampiran/bimbingan/b2.png', 'siswa', '.png');
 /*!40000 ALTER TABLE `tbl_bimbingan` ENABLE KEYS */;
 
 -- membuang struktur untuk table prakerin.tbl_file
