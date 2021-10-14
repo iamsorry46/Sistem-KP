@@ -21,7 +21,6 @@ $( function() {
             <li><a data-action="collapse"></a></li>
           </ul>
         </div>
-
         </div>
         <hr style="margin:0px;">
         <div class="panel-body">
