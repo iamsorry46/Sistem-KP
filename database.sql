@@ -73,7 +73,6 @@ CREATE TABLE IF NOT EXISTS `tbl_info` (
   KEY `kdlabel` (`kdlabel`),
   CONSTRAINT `tbl_info_ibfk_1` FOREIGN KEY (`kdlabel`) REFERENCES `tbl_label` (`kdlabel`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 -- Membuang data untuk tabel prakerin.tbl_info: ~0 rows (lebih kurang)
 /*!40000 ALTER TABLE `tbl_info` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tbl_info` ENABLE KEYS */;
