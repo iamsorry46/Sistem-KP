@@ -128,7 +128,6 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 	<?php
 	} ?>
 
-
 </head>
 
 <body>
