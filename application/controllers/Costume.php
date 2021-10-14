@@ -41,7 +41,6 @@ class Costume extends CI_Controller
         );
         redirect('users/penempatan');
     }
-
     public function tes(Type $var = null)
     {
         $data = $this->session->userdata();
