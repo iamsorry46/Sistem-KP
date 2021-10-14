@@ -189,7 +189,7 @@ $sub_menu3 = strtolower($this->uri->segment(3)); ?>
       </div>
       <footer class="w3-container">
           <div class="lampiran">
-             
+            
           </div>
         <!-- <button type="submit" class="btn btn-success btn-xs">Simpan </button> -->
       </footer>
