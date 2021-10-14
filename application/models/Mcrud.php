@@ -7,7 +7,6 @@ class Mcrud extends CI_Model {
 	var $tbl_pemb		 = 'tbl_pemb';
 	var $tbl_siswa	 = 'tbl_siswa';
 
-
 	public function get_users()
 	{
 			$this->db->from($this->tbl_users);
